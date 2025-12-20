@@ -1,0 +1,27 @@
+.goal-box {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f4f6ff;
+  animation: fadeSlide 0.6s ease;
+}
+
+.goal-box h3 {
+  color: #764ba2;
+}
+.page-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.back-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+}
+.back-btn{
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 10px;
+}
