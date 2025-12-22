@@ -1,6 +1,6 @@
 import { useState } from "react";
 import API from "../api";
-
+import './contribution.css';
 function Contribution({ goalId, refresh }) {
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
@@ -29,14 +29,16 @@ function Contribution({ goalId, refresh }) {
   };
 
   return (
-    <div className="contribution-box">
+    <div className="add-amount-container">
       <input
         type="number"
+        className="add-amount-input"
         placeholder="Add Amount ₹"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
-      <button onClick={addContribution} disabled={loading}>
+      <button className="add-btn"
+       onClick={addContribution} disabled={loading}>
         {loading ? "Adding..." : "Add"}
       </button>
     </div>

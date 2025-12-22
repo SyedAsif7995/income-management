@@ -1,0 +1,28 @@
+.auth-title {
+  text-align: center;
+  font-size: 30px;
+  color: #5b4dcf;
+  margin-bottom: 25px;
+}
+
+.auth-btn {
+  background: linear-gradient(135deg, #00e5ff, #4facfe);
+  color: #003;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.auth-btn:hover {
+  transform: scale(1.05);
+}
+
+.auth-footer {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.auth-footer span {
+  color: #5b4dcf;
+  cursor: pointer;
+  font-weight: bold;
+}

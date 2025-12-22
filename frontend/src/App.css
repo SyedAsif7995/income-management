@@ -20,6 +20,7 @@ body {
   border-radius: 16px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.2);
   animation: fadeSlide 0.8s ease;
+  
 }
 
 button {

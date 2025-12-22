@@ -34,8 +34,35 @@ function Goals() {
               <ProgressBar percent={percent} />
               <p>{percent}% Completed</p>
 
-            
               <Contribution goalId={goal.id} refresh={fetchGoals} />
+
+              <div className="actions">
+                <button
+                  className="edit-btn"
+                  onClick={() => navigate(`/edit-goal/${goal.id}`)}
+                >
+                  Edit
+                </button>
+
+                <button
+                  className="delete-btn"
+                  onClick={async () => {
+                    const confirmDelete = window.confirm(
+                      "Are you sure you want to delete this goal?"
+                    );
+                    if (!confirmDelete) return;
+
+                    try {
+                      await API.delete(`/goals/${goal.id}`);
+                      fetchGoals();
+                    } catch (err) {
+                      alert("Delete failed ❌",err);
+                    }
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           );
         })}

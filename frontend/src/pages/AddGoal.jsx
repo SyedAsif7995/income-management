@@ -8,7 +8,7 @@ function AddGoal() {
   const [loading, setLoading] = useState(false);
 
   const [goal, setGoal] = useState({
-    user_id: 1,
+
     title: "",
     target_amount: "",
     target_date: "",
