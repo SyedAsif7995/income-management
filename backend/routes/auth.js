@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const db = require("../db");
 
 const router = express.Router();
-
 router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -12,20 +11,36 @@ router.post("/register", async (req, res) => {
     return res.status(400).json({ message: "All fields required" });
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  // 🔍 Check if user already exists
+  db.query(
+    "SELECT * FROM users WHERE email = ?",
+    [email],
+    async (err, users) => {
+      if (err) {
+        return res.status(500).json({ message: "Database error" });
+      }
 
-  const sql = `
-    INSERT INTO users (name, email, password)
-    VALUES (?, ?, ?)
-  `;
+      if (users.length > 0) {
+        return res.status(409).json({ message: "User already exists" });
+      }
 
-  db.query(sql, [name, email, hashedPassword], (err) => {
-    if (err) {
-      return res.status(500).json({ message: "User already exists" });
+      // 🔐 Hash password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // ✅ Insert new user
+      db.query(
+        "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+        [name, email, hashedPassword],
+        () => {
+          res.status(201).json({
+            message: "User registered successfully ✅"
+          });
+        }
+      );
     }
-    res.json({ message: "User registered successfully ✅" });
-  });
+  );
 });
+
 
 
 router.post("/login", (req, res) => {
