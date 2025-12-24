@@ -1,20 +1,13 @@
-const mysql = require("mysql2");
-require("dotenv").config();
+const mongoose = require("mongoose");
 
-const db = mysql.createConnection({
-  host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE,
-  port: process.env.MYSQL_PORT,
-});
-
-db.connect((err) => {
-  if (err) {
-    console.error("Database connection failed ", err);
-  } else {
-    console.log("Connected to Railway MySQL ");
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("MongoDB connected ✅");
+  } catch (err) {
+    console.error("MongoDB connection failed ❌", err.message);
+    process.exit(1);
   }
-});
+};
 
-module.exports = db;
+module.exports = connectDB;
